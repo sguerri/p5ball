@@ -24,7 +24,7 @@ Levels.add(
 {
     game:
     {
-        name: "Niveau 2",
+        name: "Niveau 8",
         description: "Mettre les balles noires à gauche et les balles blanches à droite",
         defaultSolution: "ball.goTo('')",
         ballCount: 100
@@ -32,21 +32,27 @@ Levels.add(
     items:
     [
         {
-            name: "choix",
+            name: "choix_gauche",
             user: true,
-            posX: 200,
+            posX: 100,
             posY: 100,
             emitterType: "TOP",
             emitterFn: (ball: BallWithColor) =>
             {
-                let rnd = Math.random();
-                if (rnd < 0.5) {
-                    ball.color = color(0);
-                    ball.data.color = 'noir';
-                } else {
-                    ball.color = color(255);
-                    ball.data.color = 'blanc';
-                }
+                ball.color = color(0);
+                ball.data.color = 'noir';
+            }
+        },
+        {
+            name: "choix_droite",
+            user: true,
+            posX: 300,
+            posY: 100,
+            emitterType: "TOP",
+            emitterFn: (ball: BallWithColor) =>
+            {
+                ball.color = color(255);
+                ball.data.color = 'blanc';
             }
         },
         {

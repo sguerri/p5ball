@@ -33,6 +33,7 @@ interface IItem
     receiverErrorFn?: (ball: Ball) => string;
     senderFn?: (ball: Ball) => string;
     user?: boolean;
+    userFinal?: boolean;
     //userValidation?: string[];
 }
 
@@ -56,6 +57,7 @@ class Item
     success:  number;
     error: number;
     user: boolean;
+    userFinal: boolean;
     userValidation: string[];
 
     data: IItemData;
@@ -80,6 +82,7 @@ class Item
         this.receiverErrorFn = item.receiverErrorFn === undefined ? (ball: Ball) => { return ''; } : item.receiverErrorFn;
         
         this.user = item.user === undefined ? false : item.user;
+        this.userFinal = item.userFinal=== undefined ? false : item.userFinal;
         //this.userValidation = item.userValidation === undefined ? [] : item.userValidation;
 
         let c = item.color === undefined ? (this.user ? "#154360" : "#000000") : item.color;
@@ -144,7 +147,7 @@ class Item
                 } catch {
                     editor.setOption("theme", "error");
                 }
-                if (ball.redirected) {
+                if (ball.redirected || this.userFinal) {
                     this.success++;
                 } else {
                     this.error++;

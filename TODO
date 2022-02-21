@@ -1,3 +1,4 @@
 
 * [ ] Documentation
-
+* [ ] Ball : récupérer l'origine (p.ex. pour tester si ball provient de ...)
+* [ ] Ball : masquer une propriété de log()

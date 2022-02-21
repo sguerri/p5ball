@@ -24,25 +24,19 @@ Levels.add(
 {
     game:
     {
-        name: "Niveau 1",
-        description: "Envoyer les balles vers la boîte 'fin'",
-        defaultSolution: "ball.goTo('')",
+        name: "Niveau 0",
+        description: "Observer, et c'est tout...",
         ballCount: 100
     },
     items:
     [
         {
-            name: "choix",
+            name: "choix_et_fin",
             user: true,
+            userFinal: true,
             posX: 200,
-            posY: 100,
+            posY: 200,
             emitterType: "TOP",
-            receiverFn: (ball: Ball) => { return true; }
-        },
-        {
-            name: "fin",
-            posX: 200,
-            posY: 300,
             receiverFn: (ball: Ball) => { return true; }
         }
     ]
