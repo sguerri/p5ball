@@ -2,7 +2,7 @@
 
 [![GitHub release](https://img.shields.io/github/v/release/sguerri/p5ball.svg)](https://github.com/sguerri/p5ball/releases/)
 [![GitHub build status](https://img.shields.io/github/workflow/status/sguerri/p5ball/publish)](https://github.com/sguerri/p5ball/actions/workflows/publish.yml)
-[![License: GPL-3.0](https://img.shields.io/badge/license-GPL--3.0-blue)](https://spdx.org/licenses/GPL-3.0-or-later.html)
+[![License: GPL-3.0](https://img.shields.io/badge/license-GPL--3.0-blue)](https://www.gnu.org/licenses/)
 ![Open Source? Yes!](https://badgen.net/badge/Open%20Source%20%3F/Yes%21/blue?icon=github)
 
 > Ball game to learn javascript, using p5.js
@@ -45,15 +45,8 @@ Feel free to check [issues page](https://gitlab.com/sguerri/p5ball/issues). You 
 
 Copyright (C) 2022 Sebastien Guerri
 
-p5ball is free software: you can redistribute it and/or modify  
-it under the terms of the GNU General Public License as published by  
-the Free Software Foundation, either version 3 of the License, or  
-any later version.
+p5ball is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or any later version.
 
-p5ball is distributed in the hope that it will be useful,  
-but WITHOUT ANY WARRANTY; without even the implied warranty of  
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the  
-GNU General Public License for more details.
+p5ball is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License  
-along with this program.  If not, see <https://www.gnu.org/licenses/>.
+You should have received a copy of the GNU General Public License along with p5ball. If not, see <https://www.gnu.org/licenses/>.
