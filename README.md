@@ -9,7 +9,7 @@
 
 ## Usage
 
-Go to [https://sguerri.github.io/p5ball/](https://sguerri.github.io/p5ball/)
+Go to [https://sguerri.github.io/p5ball/index.html](https://sguerri.github.io/p5ball/index.html)
 
 ## Develop
 

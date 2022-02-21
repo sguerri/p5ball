@@ -1,6 +1,6 @@
 {
   "name": "p5ball",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Ball game to learn javascript, using p5.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
