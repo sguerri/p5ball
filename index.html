@@ -1,0 +1,149 @@
+<html>
+    <head>
+        <title>p5ball</title>
+        <meta charset="UTF-8">
+        <meta name="keywords" content="p5js, Game, Learn, JavaScript, Ball">
+        <meta name="description" content="Ball game to learn javascript, using p5.js">
+        <meta name="author" content="Sebastien Guerri">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+        <script src="libs/p5.min.js"></script>
+        <script src="libs/bootstrap.bundle.min.js"></script>
+        <script src="libs/codemirror.js"></script>
+        <script src="libs/codemirror_mode_javascript.js"></script>
+        <script src="libs/codemirror_matchbrackets.js"></script>
+        <script src="libs/codemirror_closebrackets.js"></script>
+        <!--
+        <script src="libs/codemirror_show-hint.js"></script>
+        <script src="libs/codemirror_javascript-hint.js"></script>
+        -->
+
+        <link rel="shortcut icon" href="./public/favicon.ico" />
+        <link rel="icon" href="./public/favicon.ico" />
+        <link rel="stylesheet" href="libs/codemirror.css" />
+        <link rel="stylesheet" href="libs/bootstrap.min.css" />
+        <style>
+            * {
+                padding: 0px;
+                margin: 0px;
+            }
+            .cke_reset_all .CodeMirror-scroll * {
+                white-space: pre-wrap !important;
+            }
+            .CodeMirror{
+                height: auto;
+                min-height: 500px;
+            }
+            .cm-s-error {
+                background-color: #FA5858;
+            }
+            .dropdown-menu {
+                height: 500px;
+                overflow-y: auto;
+            }
+            
+            /*
+            .CodeMirror-hints {
+                position: absolute;
+                z-index: 10;
+                overflow: hidden;
+                list-style: none;
+
+                margin: 0;
+                padding: 2px;
+
+                -webkit-box-shadow: 2px 3px 5px rgba(0,0,0,.2);
+                -moz-box-shadow: 2px 3px 5px rgba(0,0,0,.2);
+                box-shadow: 2px 3px 5px rgba(0,0,0,.2);
+                border-radius: 3px;
+                border: 1px solid silver;
+
+                background: white;
+                font-size: 90%;
+                font-family: monospace;
+
+                max-height: 20em;
+                overflow-y: auto;
+            }
+
+            .CodeMirror-hint {
+                margin: 0;
+                padding: 0 4px;
+                border-radius: 2px;
+                white-space: pre;
+                color: black;
+                cursor: pointer;
+            }
+
+            li.CodeMirror-hint-active {
+                background: #08f;
+                color: white;
+            }
+            */
+
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="row">
+                                <button id="btnPause" type="button" class="btn btn-secondary" style="border-radius: 0;" onclick="pause(); editor.focus()">Mettre en pause</button>
+                                <button id="btnResume" type="button" class="btn btn-secondary" style="border-radius: 0; display: none" onclick="resume(); editor.focus()">Relancer l'animation</button>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="row">
+                                <button id="btnRestart" type="button" class="btn btn-warning" style="border-radius: 0;" onclick="restart(); editor.focus(); editor.setValue(editor.getValue()); editor.refresh()">Réinitialiser</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="border: 1px solid black">
+                        <div class="col" style="padding:0">
+                            <textarea id="txtSolution"></textarea>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px"><div class="col" style="padding:0">
+                        <i>Solution : <code>ball.goTo(direction)</code></i><br />
+                        <i>Informations : <code>ball.log()</code> ; <code>game.log()</code> ; <code>node.log()</code></i><br />
+                        <i>Appuyer sur <kbd>F12</kbd> pour afficher la console</i>
+                    </div></div>
+                </div>
+                <div class="col">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="width:400px !important; border-radius:0">
+                            Changer de niveau
+                        </button>
+                        <ul id="cbLevels" class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton1" style="width:400px;border-radius:0">
+                        </ul>
+                      </div>
+                    <main></main>
+                </div>
+            </div>
+        </div>
+        <script>
+            var editor = CodeMirror.fromTextArea(document.getElementById("txtSolution"), {
+                lineNumbers: true,
+                lineWrapping: true,
+                matchBrackets: true,
+                autoCloseBrackets: true,
+                indentUnit: 4,
+                mode: "javascript"
+                //extraKeys: { "Ctrl-Space": "autocomplete" },
+                //mode: { name: "javascript", globalVars: true },
+                //showHint: true//,
+                //hint: { javascript: true }
+            });
+            editor.on("change", () => {
+                validate(editor.getValue());
+            });
+            editor.focus();
+
+            var cbLevels = document.getElementById("cbLevels");
+        </script>
+        <script src="build/build.js"></script>
+    </body>
+</html>

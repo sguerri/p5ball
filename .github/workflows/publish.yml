@@ -1,0 +1,26 @@
+name: publish
+
+on: [push]
+
+env:
+  BUILD_TYPE: Release
+
+jobs:
+  build:
+    if: startsWith(github.ref, 'refs/tags/')
+
+    name: ubuntu-latest
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout current version
+        uses: actions/checkout@v2
+
+      - name: Compress
+        run: tar -cf ./release.tar .
+
+      - name: Release
+        uses: fnkr/github-action-ghr@v1
+        env:
+          GHR_PATH: release.tar
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
