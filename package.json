@@ -8,7 +8,7 @@
     "start-compile": "tsc --watch",
     "start-run": "browser-sync start --server -w"
   },
-  "homepage": "",
+  "homepage": "https://sguerri.github.io/p5ball/",
   "devDependencies": {
     "@types/codemirror": "^5.60.5",
     "@types/p5": "^1.4.0",
