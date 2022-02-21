@@ -24,7 +24,7 @@ interface IGame
 {
     name: string;
     description: string;
-    defaultBall?: (ball: Ball) => Ball;
+    //defaultBall?: (ball: Ball) => Ball;
     defaultSolution?: string;
     ballCount?: number;
 }
@@ -43,7 +43,7 @@ class Game
 {
     name: string;
     description: string;
-    defaultBall: (ball: Ball) => Ball;
+    //defaultBall: (ball: Ball) => Ball;
     defaultSolution: string;
 
     data: IGameData;
@@ -56,7 +56,7 @@ class Game
     {
         this.name = g.name;
         this.description = g.description;
-        this.defaultBall = g.defaultBall === undefined ? (ball: Ball) => { return ball; } : g.defaultBall;
+        //this.defaultBall = g.defaultBall === undefined ? (ball: Ball) => { return ball; } : g.defaultBall;
         this.defaultSolution = g.defaultSolution === undefined ? '' : g.defaultSolution;
 
         this.data = {

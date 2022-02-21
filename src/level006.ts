@@ -24,17 +24,17 @@ Levels.add(
 {
     game:
     {
-        name: "Niveau 2",
-        description: "Mettre les balles noires à gauche et les balles blanches à droite",
+        name: "Niveau 6",
+        description: "Mettre toutes les balles au centre",
         defaultSolution: "ball.goTo('')",
         ballCount: 100
     },
     items:
     [
         {
-            name: "choix",
+            name: "choix_gauche",
             user: true,
-            posX: 200,
+            posX: 100,
             posY: 100,
             emitterType: "TOP",
             emitterFn: (ball: BallWithColor) =>
@@ -50,22 +50,31 @@ Levels.add(
             }
         },
         {
-            name: "gauche",
-            posX: 100,
-            posY: 300,
-            receiverFn: (ball: BallWithColor) =>
+            name: "choix_droite",
+            user: true,
+            posX: 300,
+            posY: 100,
+            emitterType: "TOP",
+            emitterFn: (ball: BallWithColor) =>
             {
-                return ball.data.color === 'noir';
+                let rnd = Math.random();
+                if (rnd < 0.5) {
+                    ball.color = color(0);
+                    ball.data.color = 'noir';
+                } else {
+                    ball.color = color(255);
+                    ball.data.color = 'blanc';
+                }
             }
         },
         {
-            name: "droite",
-            posX: 300,
+            name: "centre",
+            posX: 200,
             posY: 300,
             receiverFn: (ball: BallWithColor) =>
             {
-                return ball.data.color === 'blanc';
-            }        
+                return true;
+            }
         }
     ]
 }

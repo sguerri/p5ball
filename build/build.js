@@ -2,7 +2,6 @@ class Game {
     constructor(g) {
         this.name = g.name;
         this.description = g.description;
-        this.defaultBall = g.defaultBall === undefined ? (ball) => { return ball; } : g.defaultBall;
         this.defaultSolution = g.defaultSolution === undefined ? '' : g.defaultSolution;
         this.data = {
             tick: 0,
@@ -90,6 +89,7 @@ class Item {
         this.senderFn = item.senderFn === undefined ? (ball) => { return ''; } : item.senderFn;
         this.receiverErrorFn = item.receiverErrorFn === undefined ? (ball) => { return ''; } : item.receiverErrorFn;
         this.user = item.user === undefined ? false : item.user;
+        this.userFinal = item.userFinal === undefined ? false : item.userFinal;
         let c = item.color === undefined ? (this.user ? "#154360" : "#000000") : item.color;
         this.color = color(c);
         this.balls = [];
@@ -148,7 +148,7 @@ class Item {
                 catch (_a) {
                     editor.setOption("theme", "error");
                 }
-                if (ball.redirected) {
+                if (ball.redirected || this.userFinal) {
                     this.success++;
                 }
                 else {
@@ -241,6 +241,8 @@ class Ball {
     }
 }
 Ball.setup = (ball) => { };
+class BallWithColor extends Ball {
+}
 class Levels {
     static add(level) {
         Levels.levels.push(level);
@@ -319,22 +321,58 @@ function validate(value) {
     else {
     }
 }
-class BallL001 extends Ball {
-}
 Levels.add({
     game: {
-        name: "Niveau 1",
-        description: "Mettre les balles noires à gauche et les balles blanches à droite",
-        defaultBall: (ball) => {
-            ball.data.color = '';
-            return ball;
-        },
-        defaultSolution: "ball.goTo('')",
-        ballCount: 20
+        name: "Niveau 0",
+        description: "Observer, et c'est tout...",
+        ballCount: 100
     },
     items: [
         {
-            name: "main",
+            name: "choix_et_fin",
+            user: true,
+            userFinal: true,
+            posX: 200,
+            posY: 200,
+            emitterType: "TOP",
+            receiverFn: (ball) => { return true; }
+        }
+    ]
+});
+Levels.add({
+    game: {
+        name: "Niveau 1",
+        description: "Envoyer les balles vers la boîte 'fin'",
+        defaultSolution: "ball.goTo('')",
+        ballCount: 100
+    },
+    items: [
+        {
+            name: "choix",
+            user: true,
+            posX: 200,
+            posY: 100,
+            emitterType: "TOP",
+            receiverFn: (ball) => { return true; }
+        },
+        {
+            name: "fin",
+            posX: 200,
+            posY: 300,
+            receiverFn: (ball) => { return true; }
+        }
+    ]
+});
+Levels.add({
+    game: {
+        name: "Niveau 2",
+        description: "Mettre les balles noires à gauche et les balles blanches à droite",
+        defaultSolution: "ball.goTo('')",
+        ballCount: 100
+    },
+    items: [
+        {
+            name: "choix",
             user: true,
             posX: 200,
             posY: 100,
@@ -369,25 +407,177 @@ Levels.add({
         }
     ]
 });
-class BallL002 extends Ball {
-}
 Levels.add({
-    "game": {
-        "name": "Niveau 2",
-        "description": "Mettre les balles noires à gauche et les balles blanches à droite",
-        "defaultBall": (ball) => {
-            ball.data.color = '';
-            return ball;
-        },
-        defaultSolution: "ball.goTo('')"
+    game: {
+        name: "Niveau 3",
+        description: "Mettre les balles noires à gauche, les balles blanches à droite et les balles vertes au centre",
+        defaultSolution: "ball.goTo('')",
+        ballCount: 100
     },
-    "items": [
+    items: [
         {
-            "name": "main",
-            "posX": 200,
-            "posY": 100,
-            "emitterType": "TOP",
-            "emitterFn": (ball) => {
+            name: "choix",
+            user: true,
+            posX: 200,
+            posY: 100,
+            emitterType: "TOP",
+            emitterFn: (ball) => {
+                let rnd = Math.random();
+                if (rnd < 0.33) {
+                    ball.color = color(0);
+                    ball.data.color = 'noir';
+                }
+                else if (rnd < 0.66) {
+                    ball.color = color(0, 130, 0);
+                    ball.data.color = 'vert';
+                }
+                else {
+                    ball.color = color(255);
+                    ball.data.color = 'blanc';
+                }
+            }
+        },
+        {
+            name: "gauche",
+            posX: 100,
+            posY: 300,
+            receiverFn: (ball) => {
+                return ball.data.color === 'noir';
+            }
+        },
+        {
+            name: "centre",
+            posX: 200,
+            posY: 300,
+            receiverFn: (ball) => {
+                return ball.data.color === 'vert';
+            }
+        },
+        {
+            name: "droite",
+            posX: 300,
+            posY: 300,
+            receiverFn: (ball) => {
+                return ball.data.color === 'blanc';
+            }
+        }
+    ]
+});
+Levels.add({
+    game: {
+        name: "Niveau 4",
+        description: "Mettre les balles noires et vertes à gauche, les balles blanches à droite",
+        defaultSolution: "ball.goTo('')",
+        ballCount: 100
+    },
+    items: [
+        {
+            name: "choix",
+            user: true,
+            posX: 200,
+            posY: 100,
+            emitterType: "TOP",
+            emitterFn: (ball) => {
+                let rnd = Math.random();
+                if (rnd < 0.33) {
+                    ball.color = color(0);
+                    ball.data.color = 'noir';
+                }
+                else if (rnd < 0.66) {
+                    ball.color = color(0, 130, 0);
+                    ball.data.color = 'vert';
+                }
+                else {
+                    ball.color = color(255);
+                    ball.data.color = 'blanc';
+                }
+            }
+        },
+        {
+            name: "gauche",
+            posX: 100,
+            posY: 300,
+            receiverFn: (ball) => {
+                return ball.data.color === 'noir' || ball.data.color === 'vert';
+            }
+        },
+        {
+            name: "droite",
+            posX: 300,
+            posY: 300,
+            receiverFn: (ball) => {
+                return ball.data.color === 'blanc';
+            }
+        }
+    ]
+});
+Levels.add({
+    game: {
+        name: "Niveau 5",
+        description: "Mettre les balles noires et vertes à gauche, les balles blanches et rouges à droite",
+        defaultSolution: "ball.goTo('')",
+        ballCount: 100
+    },
+    items: [
+        {
+            name: "choix",
+            user: true,
+            posX: 200,
+            posY: 100,
+            emitterType: "TOP",
+            emitterFn: (ball) => {
+                let rnd = Math.random();
+                if (rnd < 0.25) {
+                    ball.color = color(0);
+                    ball.data.color = 'noir';
+                }
+                else if (rnd < 0.50) {
+                    ball.color = color(0, 130, 0);
+                    ball.data.color = 'vert';
+                }
+                else if (rnd < 0.75) {
+                    ball.color = color(130, 0, 0);
+                    ball.data.color = 'rouge';
+                }
+                else {
+                    ball.color = color(255);
+                    ball.data.color = 'blanc';
+                }
+            }
+        },
+        {
+            name: "gauche",
+            posX: 100,
+            posY: 300,
+            receiverFn: (ball) => {
+                return ball.data.color === 'noir' || ball.data.color === 'vert';
+            }
+        },
+        {
+            name: "droite",
+            posX: 300,
+            posY: 300,
+            receiverFn: (ball) => {
+                return ball.data.color === 'blanc' || ball.data.color === 'rouge';
+            }
+        }
+    ]
+});
+Levels.add({
+    game: {
+        name: "Niveau 6",
+        description: "Mettre toutes les balles au centre",
+        defaultSolution: "ball.goTo('')",
+        ballCount: 100
+    },
+    items: [
+        {
+            name: "choix_gauche",
+            user: true,
+            posX: 100,
+            posY: 100,
+            emitterType: "TOP",
+            emitterFn: (ball) => {
                 let rnd = Math.random();
                 if (rnd < 0.5) {
                     ball.color = color(0);
@@ -397,22 +587,141 @@ Levels.add({
                     ball.color = color(255);
                     ball.data.color = 'blanc';
                 }
-            },
-            "user": true
+            }
         },
         {
-            "name": "gauche",
-            "posX": 100,
-            "posY": 300,
-            "receiverFn": (ball) => {
+            name: "choix_droite",
+            user: true,
+            posX: 300,
+            posY: 100,
+            emitterType: "TOP",
+            emitterFn: (ball) => {
+                let rnd = Math.random();
+                if (rnd < 0.5) {
+                    ball.color = color(0);
+                    ball.data.color = 'noir';
+                }
+                else {
+                    ball.color = color(255);
+                    ball.data.color = 'blanc';
+                }
+            }
+        },
+        {
+            name: "centre",
+            posX: 200,
+            posY: 300,
+            receiverFn: (ball) => {
+                return true;
+            }
+        }
+    ]
+});
+Levels.add({
+    game: {
+        name: "Niveau 7",
+        description: "Mettre les balles noires à gauche et les balles blanches à droite",
+        defaultSolution: "ball.goTo('')",
+        ballCount: 100
+    },
+    items: [
+        {
+            name: "choix_gauche",
+            user: true,
+            posX: 100,
+            posY: 100,
+            emitterType: "TOP",
+            emitterFn: (ball) => {
+                let rnd = Math.random();
+                if (rnd < 0.5) {
+                    ball.color = color(0);
+                    ball.data.color = 'noir';
+                }
+                else {
+                    ball.color = color(255);
+                    ball.data.color = 'blanc';
+                }
+            }
+        },
+        {
+            name: "choix_droite",
+            user: true,
+            posX: 300,
+            posY: 100,
+            emitterType: "TOP",
+            emitterFn: (ball) => {
+                let rnd = Math.random();
+                if (rnd < 0.5) {
+                    ball.color = color(0);
+                    ball.data.color = 'noir';
+                }
+                else {
+                    ball.color = color(255);
+                    ball.data.color = 'blanc';
+                }
+            }
+        },
+        {
+            name: "gauche",
+            posX: 100,
+            posY: 300,
+            receiverFn: (ball) => {
                 return ball.data.color === 'noir';
             }
         },
         {
-            "name": "droite",
-            "posX": 300,
-            "posY": 300,
-            "receiverFn": (ball) => {
+            name: "droite",
+            posX: 300,
+            posY: 300,
+            receiverFn: (ball) => {
+                return ball.data.color === 'blanc';
+            }
+        }
+    ]
+});
+Levels.add({
+    game: {
+        name: "Niveau 8",
+        description: "Mettre les balles noires à gauche et les balles blanches à droite",
+        defaultSolution: "ball.goTo('')",
+        ballCount: 100
+    },
+    items: [
+        {
+            name: "choix_gauche",
+            user: true,
+            posX: 100,
+            posY: 100,
+            emitterType: "TOP",
+            emitterFn: (ball) => {
+                ball.color = color(0);
+                ball.data.color = 'noir';
+            }
+        },
+        {
+            name: "choix_droite",
+            user: true,
+            posX: 300,
+            posY: 100,
+            emitterType: "TOP",
+            emitterFn: (ball) => {
+                ball.color = color(255);
+                ball.data.color = 'blanc';
+            }
+        },
+        {
+            name: "gauche",
+            posX: 100,
+            posY: 300,
+            receiverFn: (ball) => {
+                return ball.data.color === 'noir';
+            }
+        },
+        {
+            name: "droite",
+            posX: 300,
+            posY: 300,
+            receiverFn: (ball) => {
                 return ball.data.color === 'blanc';
             }
         }

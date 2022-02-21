@@ -92,3 +92,13 @@ class Ball
         this.speedX = (item.posX - this.posX) / (item.posY - this.posY);
     }
 }
+
+interface IBallWithColor extends IBallData
+{
+    color: string;
+}
+
+class BallWithColor extends Ball
+{
+    data: IBallWithColor;
+}

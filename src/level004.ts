@@ -24,8 +24,8 @@ Levels.add(
 {
     game:
     {
-        name: "Niveau 2",
-        description: "Mettre les balles noires à gauche et les balles blanches à droite",
+        name: "Niveau 4",
+        description: "Mettre les balles noires et vertes à gauche, les balles blanches à droite",
         defaultSolution: "ball.goTo('')",
         ballCount: 100
     },
@@ -40,9 +40,12 @@ Levels.add(
             emitterFn: (ball: BallWithColor) =>
             {
                 let rnd = Math.random();
-                if (rnd < 0.5) {
+                if (rnd < 0.33) {
                     ball.color = color(0);
                     ball.data.color = 'noir';
+                } else if (rnd < 0.66) {
+                    ball.color = color(0, 130, 0);
+                    ball.data.color = 'vert';
                 } else {
                     ball.color = color(255);
                     ball.data.color = 'blanc';
@@ -55,7 +58,7 @@ Levels.add(
             posY: 300,
             receiverFn: (ball: BallWithColor) =>
             {
-                return ball.data.color === 'noir';
+                return ball.data.color === 'noir' || ball.data.color === 'vert';
             }
         },
         {
