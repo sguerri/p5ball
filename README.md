@@ -40,7 +40,7 @@ Sébastien Guerri - [Github](https://github.com/sguerri)
 
 Contributions, issues and feature requests are welcome!
 
-Feel free to check [issues page](https://gitlab.com/sguerri/p5ball/issues). You can also contact the author.
+Feel free to check [issues page](https://github.com/sguerri/p5ball/issues). You can also contact the author.
 
 ## License
 
