@@ -17,7 +17,19 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Compress
-        run: tar -cf ./release.tar .
+        run: 
+          mkdir -p release && \
+          mkdir -p release/build && \
+          mkdir -p release/libs && \
+          mkdir -p release/public && \
+          cp index.html release/ && \
+          cp COPYING release/ && \
+          cp README.md release/ && \
+          cp build/*.* release/build/ && \
+          cp libs/*.* release/libs/ && \
+          cp public/*.* release/public/ && \
+          cd release && \
+          tar -cf ../release.tar .
 
       - name: Release
         uses: fnkr/github-action-ghr@v1
