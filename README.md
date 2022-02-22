@@ -1,9 +1,9 @@
 # Welcome to p5ball
 
-[![GitHub release](https://img.shields.io/github/v/release/sguerri/p5ball.svg)](https://github.com/sguerri/p5ball/releases/)
-[![GitHub build status](https://img.shields.io/github/workflow/status/sguerri/p5ball/publish)](https://github.com/sguerri/p5ball/actions/workflows/publish.yml)
-[![License: GPL-3.0](https://img.shields.io/badge/license-GPL--3.0-blue)](https://www.gnu.org/licenses/)
-![Open Source? Yes!](https://badgen.net/badge/Open%20Source%20%3F/Yes%21/blue?icon=github)
+[![](https://badgen.net/github/release/sguerri/p5ball)](https://github.com/sguerri/p5ball/releases/)
+[![](https://img.shields.io/github/workflow/status/sguerri/p5ball/publish)](https://github.com/sguerri/p5ball/actions/workflows/publish.yml)
+[![](https://badgen.net/github/license/sguerri/p5ball)](https://www.gnu.org/licenses/)
+[![](https://badgen.net/badge/Open%20Source%20%3F/Yes%21/blue?icon=github)](#)
 
 > Ball game to learn javascript, using p5.js
 
